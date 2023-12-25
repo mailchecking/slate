@@ -1,245 +1,318 @@
 ---
-title: API Reference
-
-language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
-  - shell
-  - ruby
-  - python
-  - javascript
+title: mailchecking v1
+language_tabs:
+  - shell: Shell
+  - http: HTTP
+  - javascript: JavaScript
+  - ruby: Ruby
+  - python: Python
+  - php: PHP
+  - java: Java
+  - go: Go
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - <a href='https://mailcheck.ing/account'>Sign Up for a API Key</a>
+  # - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
   - errors
 
 search: true
-
 code_clipboard: true
+highlight_theme: darkula
+headingLevel: 2
+
 
 meta:
   - name: description
     content: Documentation for the Kittn API
+
 ---
+
+<!-- Generator: Widdershins v4.0.1 -->
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+You can find our REST API documentation here
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Base URLs:
+
+* <a href="https://api.mailcheck.ing/v1">https://api.mailcheck.ing/v1</a>
+
+Email: <a href="mailto:contact@mailcheck.ing">mailchecking</a> Web: <a href="https://mailcheck.ing">mailchecking</a> 
 
 # Authentication
 
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+* API Key (ApiKeyAuth)
+    - Parameter Name: **auth_key**, in: header. API key for authenticated access. You can view and manage your API key in the [Dashboard](https://mailcheck.ing/account). Be sure to keep your API key secure. Do not share it in publicly accessible areas such as GitHub, client-side code, and so forth. All API requests must be made over HTTPS. Calls made over plain HTTP will fail.
 
 <aside class="notice">
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+> To authorize, use auth_key header
 
 ```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here" \
+  -H "auth_key: meowmeowmeow"
+```
+
+> Make sure to replace `meowmeowmeow` with your API key.
+
+# verify
+
+## get verify
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://api.mailcheck.ing/v1/verify?email=string \
+  -H 'Accept: application/json' \
+  -H 'auth_key: string'
+
+```
+
+```http
+GET https://api.mailcheck.ing/v1/verify?email=string HTTP/1.1
+Host: api.mailcheck.ing
+Accept: application/json
+auth_key: string
+
 ```
 
 ```javascript
-const kittn = require('kittn');
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+const headers = {
+  'Accept':'application/json',
+  'auth_key':'string'
+};
+
+fetch('https://api.mailcheck.ing/v1/verify?email=string',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
 ```
 
-> The above command returns JSON structured like this:
+```ruby
+require 'rest-client'
+require 'json'
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+headers = {
+  'Accept' => 'application/json',
+  'auth_key' => 'string'
+}
+
+result = RestClient.get 'https://api.mailcheck.ing/v1/verify',
+  params: {
+  'email' => 'string'
+}, headers: headers
+
+p JSON.parse(result)
+
 ```
 
-This endpoint retrieves all kittens.
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'auth_key': 'string'
+}
 
-### HTTP Request
+r = requests.get('https://api.mailcheck.ing/v1/verify', params={
+  'email': 'string'
+}, headers = headers)
 
-`GET http://example.com/api/kittens`
+print(r.json())
 
-### Query Parameters
+```
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+```php
+<?php
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+    'auth_key' => 'string',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','https://api.mailcheck.ing/v1/verify', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("https://api.mailcheck.ing/v1/verify?email=string");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "auth_key": []string{"string"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://api.mailcheck.ing/v1/verify", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /verify`
+
+*verify*
+
+Perform a full verification of an email address.
+
+### Parameters
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|email|query|string|true|Input email to check|
+|auth_key|header|string|true|Secret key to authenticate mailchecking apis|
+
+<aside class="notice">
+This operation does require authentication
 </aside>
+> Example responses
 
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+> 200 Response
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "address": [
+    "",
+    "test@gmail.com",
+    "test"
+  ],
+  "valid_format": true,
+  "smtp": {
+    "deliverable": false,
+    "full_inbox": false,
+    "catch_all": false
+  },
+  "host": {
+    "host_exists": true,
+    "mx_records": [
+      "alt2.gmail-smtp-in.l.google.com.",
+      "alt3.gmail-smtp-in.l.google.com.",
+      "alt1.gmail-smtp-in.l.google.com."
+    ]
+  },
+  "is_disposable": false,
+  "suggested_emails": [
+    "test@gmail.com",
+    "test@ymail.com",
+    "test@mail.com"
+  ],
+  "final_status": "not deliverable"
 }
 ```
 
-This endpoint retrieves a specific kitten.
+### Responses
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|OK|none|Inline|
+|4XX|NOT OK|none|Inline|
 
-### HTTP Request
+### Response Schema
 
-`GET http://example.com/kittens/<ID>`
+Status Code **200**
 
-### URL Parameters
+*Response Object*
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|» address|[string]|true|none|['name','email','username'] array for eg if input is 'Tom Gold <tom.g@gmail.com>' the address would be ['Tom Gold','tom.g@gmail.com','tom.g']|
+|» valid_format|boolean|true|none|Is email in valid format?|
+|» smtp|object|true|none|Verifications performed by connecting to the mail server via SMTP.|
+|»» deliverable|boolean|true|none|Is the mail SMTP deliverable?|
+|»» full_inbox|boolean|true|none|Does email has full inbox?|
+|»» catch_all|boolean|true|none|Is the email catch all?|
+|» host|object|true|none|All the destination host details|
+|»» host_exists|boolean|true|none|Does the host exist?|
+|»» mx_records|[string]|true|none|If exists what are the mx records? Return empty list if there are no host records|
+|» is_disposable|boolean|true|none|Is the email from disposable domains?|
+|» suggested_emails|[string]|false|none|If the email is not delivarable then this part return few suggested emails considering there is a typo mistake with domain.|
+|» final_status|string|true|none|An enum to describe how confident we are that the recipient address is real.|
 
-## Delete a Specific Kitten
+#### Enumerated Values
 
-```ruby
-require 'kittn'
+|Property|Value|
+|---|---|
+|final_status|deliverable|
+|final_status|not deliverable|
+|final_status|deliverable all|
+|final_status|unkown|
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
+Status Code **4XX**
 
-```python
-import kittn
+*Response Object*
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
+CODE : Reason for a not sucessful request
 
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
+> Check for error message in code string.
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
+> 4XX Response
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+  "code": "string"
 }
 ```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
