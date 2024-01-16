@@ -1,318 +1,247 @@
----
-title: mailchecking v1
-language_tabs:
-  - shell: Shell
-  - http: HTTP
-  - javascript: JavaScript
-  - ruby: Ruby
-  - python: Python
-  - php: PHP
-  - java: Java
-  - go: Go
+# Mailcheck.ing API Documentation
 
-toc_footers:
-  - <a href='https://mailcheck.ing/account'>Sign Up for a API Key</a>
-  # - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+Welcome to the Mailcheck.ing API. This API allows you to verify email addresses to check their validity, domain details, SMTP server status, check data breaches, and more.
 
-includes:
-  - errors
+## API Information
 
-search: true
-code_clipboard: true
-highlight_theme: darkula
-headingLevel: 2
+- **API Version**: 1.0
+- **Base URL**: `http://api.mailcheck.ing`
 
+## Authentication
 
-meta:
-  - name: description
-    content: Documentation for the Kittn API
-
----
-
-<!-- Generator: Widdershins v4.0.1 -->
-
-# Introduction
-
-> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
-
-You can find our REST API documentation here
-
-Base URLs:
-
-* <a href="https://api.mailcheck.ing/v1">https://api.mailcheck.ing/v1</a>
-
-Email: <a href="mailto:contact@mailcheck.ing">mailchecking</a> Web: <a href="https://mailcheck.ing">mailchecking</a> 
-
-# Authentication
-
-* API Key (ApiKeyAuth)
-    - Parameter Name: **auth_key**, in: header. API key for authenticated access. You can view and manage your API key in the [Dashboard](https://mailcheck.ing/account). Be sure to keep your API key secure. Do not share it in publicly accessible areas such as GitHub, client-side code, and so forth. All API requests must be made over HTTPS. Calls made over plain HTTP will fail.
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-> To authorize, use auth_key header
+> For Authentication, use Authorization header
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "auth_key: meowmeowmeow"
+curl "URL" \
+  -H "Authorization: <API-KEY>"
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+To access the Mailcheck.ing API, you must provide your authentication credentials in the request header.
 
-# verify
+- **Header Name**: `Authorization`
+- **Type**: `string`
+- **Required**: Yes
 
-## get verify
+## Endpoints
 
-> Code samples
+> Sample request: POST https://api.mailcheck.ing/v1/verify
 
 ```shell
-# You can also use wget
-curl -X GET https://api.mailcheck.ing/v1/verify?email=string \
-  -H 'Accept: application/json' \
-  -H 'auth_key: string'
-
+curl -X 'POST' \
+  'https://api.mailcheck.ing/v1/verify' \
+  -H 'accept: application/json' \
+  -H 'Authorization: <API_KEY_HERE>' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "check_breach": true,
+  "email": "string",
+  "verify": true
+}'
 ```
 
-```http
-GET https://api.mailcheck.ing/v1/verify?email=string HTTP/1.1
-Host: api.mailcheck.ing
-Accept: application/json
-auth_key: string
+### Verify Email Address
 
-```
+Verifies the provided email address with optional breach and verification checks.
 
-```javascript
+- **URL**: `/v1/verify`
+- **Method**: `POST`
+- **Content-Type**: `application/json`
+- **Authorization**: Required
 
-const headers = {
-  'Accept':'application/json',
-  'auth_key':'string'
-};
+#### Request Parameters
 
-fetch('https://api.mailcheck.ing/v1/verify?email=string',
+- **check_breach**: Flag to enable breach check. If true, then a breach check will be performed.
+- **email**: The email address to verify.
+- **verify**: Flag to enable verification check. If true, then Syntax, MX, SMTP, CatchAll checks will be performed.
+
+#### Request Example
+
+
+`
 {
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/json',
-  'auth_key' => 'string'
+"check_breach": true,
+"email": "example@example.com",
+"verify": true
 }
-
-result = RestClient.get 'https://api.mailcheck.ing/v1/verify',
-  params: {
-  'email' => 'string'
-}, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json',
-  'auth_key': 'string'
-}
-
-r = requests.get('https://api.mailcheck.ing/v1/verify', params={
-  'email': 'string'
-}, headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Accept' => 'application/json',
-    'auth_key' => 'string',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('GET','https://api.mailcheck.ing/v1/verify', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("https://api.mailcheck.ing/v1/verify?email=string");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-        "auth_key": []string{"string"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "https://api.mailcheck.ing/v1/verify", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /verify`
-
-*verify*
-
-Perform a full verification of an email address.
-
-### Parameters
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|email|query|string|true|Input email to check|
-|auth_key|header|string|true|Secret key to authenticate mailchecking apis|
-
+`
 <aside class="notice">
-This operation does require authentication
+API usage will be calculated based on if the verify and check_breach parameters are set to true. If both are set to true, then 2 API calls will be consumed. check_breach is under active development and will be available soon.
 </aside>
-> Example responses
 
-> 200 Response
+
+#### Responses
+
+> Sample 200 Response
 
 ```json
 {
-  "address": [
-    "",
-    "test@gmail.com",
-    "test"
-  ],
-  "valid_format": true,
-  "smtp": {
-    "deliverable": false,
-    "full_inbox": false,
-    "catch_all": false
+  "email": "test@gmail.com",
+  "reachable": "no",
+  "syntax": {
+    "username": "test",
+    "domain": "gmail.com",
+    "valid": true
   },
-  "host": {
+  "smtp": {
     "host_exists": true,
-    "mx_records": [
-      "alt2.gmail-smtp-in.l.google.com.",
-      "alt3.gmail-smtp-in.l.google.com.",
-      "alt1.gmail-smtp-in.l.google.com."
+    "full_inbox": false,
+    "catch_all": false,
+    "deliverable": false,
+    "disabled": false
+  },
+  "gravatar": {
+    "gravatarUrl": "https://gravatar.com/example",
+    "hasGravatar": true
+    },
+  "suggestion": "",
+  "disposable": false,
+  "role_account": true,
+  "free": true,
+  "mx": {
+    "HasMXRecord": true,
+    "Records": [
+      {
+        "Host": "gmail-smtp-in.l.google.com.",
+        "Pref": 5
+      },
+      {
+        "Host": "alt1.gmail-smtp-in.l.google.com.",
+        "Pref": 10
+      },
+      {
+        "Host": "alt2.gmail-smtp-in.l.google.com.",
+        "Pref": 20
+      },
+      {
+        "Host": "alt3.gmail-smtp-in.l.google.com.",
+        "Pref": 30
+      },
+      {
+        "Host": "alt4.gmail-smtp-in.l.google.com.",
+        "Pref": 40
+      }
     ]
   },
-  "is_disposable": false,
-  "suggested_emails": [
-    "test@gmail.com",
-    "test@ymail.com",
-    "test@mail.com"
-  ],
-  "final_status": "not deliverable"
+  "breach": {
+    "found": false,
+    "details": []
+  }
 }
 ```
 
-### Responses
+##### 200 OK
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|OK|none|Inline|
-|4XX|NOT OK|none|Inline|
+Successful response with details about the email verification.
 
-### Response Schema
+###### Response Attributes
 
-Status Code **200**
+- **breach**: Details about the breach, if any.
+- **disposable**: Indicates if the email is from a disposable email provider.
+- **email**: The email address that was verified.
+- **free**: Indicates if the domain is a free email domain.
+- **gravatar**: Details about the Gravatar associated with the email.
+- **mx**: Details about the MX records of the domain.
+- **reachable**: Describes whether the recipient address is real.
+- **role_account**: Indicates if the account is role-based.
+- **smtp**: Details about the SMTP response of the email.
+- **suggestion**: Suggested domain if the original domain is misspelled.
+- **syntax**: Details about the email address syntax.
 
-*Response Object*
+<aside class="notice">
+reachable parameter can have following values:
+<ul>
+<li>"yes" - The recipient address is real and deliverable.</li>
+<li>"no" - The recipient address is not deliverable.</li>
+<li>"unknown" - The SMTP server does not allow verification(There could be several reasons and accept all is one of them).</li>
+</ul>
+</aside>
 
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|» address|[string]|true|none|['name','email','username'] array for eg if input is 'Tom Gold <tom.g@gmail.com>' the address would be ['Tom Gold','tom.g@gmail.com','tom.g']|
-|» valid_format|boolean|true|none|Is email in valid format?|
-|» smtp|object|true|none|Verifications performed by connecting to the mail server via SMTP.|
-|»» deliverable|boolean|true|none|Is the mail SMTP deliverable?|
-|»» full_inbox|boolean|true|none|Does email has full inbox?|
-|»» catch_all|boolean|true|none|Is the email catch all?|
-|» host|object|true|none|All the destination host details|
-|»» host_exists|boolean|true|none|Does the host exist?|
-|»» mx_records|[string]|true|none|If exists what are the mx records? Return empty list if there are no host records|
-|» is_disposable|boolean|true|none|Is the email from disposable domains?|
-|» suggested_emails|[string]|false|none|If the email is not delivarable then this part return few suggested emails considering there is a typo mistake with domain.|
-|» final_status|string|true|none|An enum to describe how confident we are that the recipient address is real.|
+##### 400 Bad Request
 
-#### Enumerated Values
+The request was invalid or cannot be served.
 
-|Property|Value|
-|---|---|
-|final_status|deliverable|
-|final_status|not deliverable|
-|final_status|deliverable all|
-|final_status|unkown|
+##### 401 Unauthorized
 
-Status Code **4XX**
+Authentication credentials were missing or incorrect.
 
-*Response Object*
+##### 500 Internal Server Error
 
-CODE : Reason for a not sucessful request
+Something went wrong on the server.
 
-> Check for error message in code string.
+<aside class="notice">
+"Accept all" in the context of SMTP (Simple Mail Transfer Protocol) refers to a configuration or behavior of a mail server where the server accepts all incoming email messages regardless of whether the recipient address is valid or exists on the server. This behavior can be seen in certain types of mail servers, especially in corporate environments or specialized SMTP services.
+</aside>
 
-> 4XX Response
+### Result
+| Field        | Type    | Description                                                |
+|--------------|---------|------------------------------------------------------------|
+| breach       | object  | Details about the breach.                                  |
+| disposable   | boolean | Whether it is a disposable email address.                  |
+| email        | string  | Passed email address.                                      |
+| free         | boolean | Whether the domain is a free email domain.                 |
+| gravatar     | object  | Gravatar details.                                          |
+| mx           | object  | Details about the MX records of the domain.                |
+| reachable    | string  | Describes whether the recipient address is real.           |
+| role_account | boolean | Whether the account is role-based.                         |
+| smtp         | object  | SMTP response details of the email.                        |
+| suggestion   | string  | Domain suggestion for misspelled domains.                  |
+| syntax       | object  | Details about the email address syntax.                    |
 
-```json
-{
-  "code": "string"
-}
-```
+
+## Definitions
+
+### Breach
+| Field   | Type  | Description                              |
+|---------|-------|------------------------------------------|
+| details | array | Array of `Breach.Details`.               |
+| found   | boolean | Indicates if a breach was found.       |
+
+### Breach.Details
+| Field       | Type   | Description                        |
+|-------------|--------|------------------------------------|
+| date        | string | Date of the breach.                |
+| description | string | Description of the breach.         |
+| name        | string | Name of the breach.                |
+| title       | string | Title of the breach.               |
+
+### Gravatar
+| Field       | Type    | Description          |
+|-------------|---------|----------------------|
+| gravatarUrl | string  | Gravatar URL.        |
+| hasGravatar | boolean | Whether has gravatar.|
+
+### Mx
+
+| Field         | Description                                         |
+|---------------|-----------------------------------------------------|
+| hasMXRecord   | Indicates if there is one or more MX records.       |
+| records       | Represents DNS MX records. `Mx.Records`             |
+
+### Mx.Records
+
+| Field         | Description                                      |
+|---------------|--------------------------------------------------|
+| host          | The host of the MX record.                       |
+| pref          | The preference number of the MX record.          |
+
+### SMTP
+
+| Field         | Description                                                 |
+|---------------|-------------------------------------------------------------|
+| catch_all     | Indicates if the domain has a catch-all email address.      |
+| deliverable   | Indicates if an email can be sent to the email server.      |
+| disabled      | Indicates if the email is blocked or disabled by the provider. |
+| full_inbox    | Indicates if the email account's inbox is full.             |
+| host_exists   | Indicates if the host exists.                               |
+
+### Syntax
+
+| Field         | Description                                        |
+|---------------|----------------------------------------------------|
+| domain        | The domain part of the email address.              |
+| username      | The username part of the email address.            |
+| valid         | Indicates if the email address is in a valid format. |
+
+## Contact
+
+For any additional information or support, please contact the contact@mailcheck.ing

@@ -1,0 +1,278 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "description": "This is an email verifier server with OpenAPI spec.",
+        "title": "Email Verifier API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "https://api.mailcheck.ing",
+    "basePath": "/",
+    "paths": {
+        "/v1/verify": {
+            "post": {
+                "description": "Verify an email address",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "verification"
+                ],
+                "summary": "Verify email",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Authentication header",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "Email verification request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dbhelpers.EmailVerifyRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/emailverifier.Result"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dbhelpers.EmailVerifyRequest": {
+            "type": "object",
+            "required": [
+                "check_breach",
+                "email",
+                "verify"
+            ],
+            "properties": {
+                "check_breach": {
+                    "description": "Flag to enable breach check. if true then breach check will be performed.",
+                    "type": "boolean"
+                },
+                "email": {
+                    "description": "The email address to verify.",
+                    "type": "string"
+                },
+                "verify": {
+                    "description": "Flag to enable verification check. if true then Syntax, MX, SMTP, CatchAll checks will be performed.",
+                    "type": "boolean"
+                }
+            }
+        },
+        "emailverifier.Breach": {
+            "type": "object",
+            "properties": {
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/emailverifier.BreachDetails"
+                    }
+                },
+                "found": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "emailverifier.BreachDetails": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "emailverifier.Gravatar": {
+            "type": "object",
+            "properties": {
+                "gravatarUrl": {
+                    "description": "gravatar url",
+                    "type": "string"
+                },
+                "hasGravatar": {
+                    "description": "whether has gravatar",
+                    "type": "boolean"
+                }
+            }
+        },
+        "emailverifier.Mx": {
+            "type": "object",
+            "properties": {
+                "hasMXRecord": {
+                    "description": "whether has 1 or more MX record",
+                    "type": "boolean"
+                },
+                "records": {
+                    "description": "represent DNS MX records",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/net.MX"
+                    }
+                }
+            }
+        },
+        "emailverifier.Result": {
+            "type": "object",
+            "properties": {
+                "breach": {
+                    "description": "details about the breach",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/emailverifier.Breach"
+                        }
+                    ]
+                },
+                "disposable": {
+                    "description": "is this a DEA (disposable email address)",
+                    "type": "boolean"
+                },
+                "email": {
+                    "description": "passed email address",
+                    "type": "string"
+                },
+                "free": {
+                    "description": "is domain a free email domain",
+                    "type": "boolean"
+                },
+                "gravatar": {
+                    "description": "whether or not have gravatar for the email",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/emailverifier.Gravatar"
+                        }
+                    ]
+                },
+                "mx": {
+                    "description": "details about the MX records of the domain",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/emailverifier.Mx"
+                        }
+                    ]
+                },
+                "reachable": {
+                    "description": "an enumeration to describe whether the recipient address is real",
+                    "type": "string"
+                },
+                "role_account": {
+                    "description": "is account a role-based account",
+                    "type": "boolean"
+                },
+                "smtp": {
+                    "description": "details about the SMTP response of the email",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/emailverifier.SMTP"
+                        }
+                    ]
+                },
+                "suggestion": {
+                    "description": "domain suggestion when domain is misspelled",
+                    "type": "string"
+                },
+                "syntax": {
+                    "description": "details about the email address syntax",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/emailverifier.Syntax"
+                        }
+                    ]
+                }
+            }
+        },
+        "emailverifier.SMTP": {
+            "type": "object",
+            "properties": {
+                "catch_all": {
+                    "description": "does the domain have a catch-all email address?",
+                    "type": "boolean"
+                },
+                "deliverable": {
+                    "description": "can send an email to the email server?",
+                    "type": "boolean"
+                },
+                "disabled": {
+                    "description": "is the email blocked or disabled by the provider?",
+                    "type": "boolean"
+                },
+                "full_inbox": {
+                    "description": "is the email account's inbox full?",
+                    "type": "boolean"
+                },
+                "host_exists": {
+                    "description": "is the host exists?",
+                    "type": "boolean"
+                }
+            }
+        },
+        "emailverifier.Syntax": {
+            "type": "object",
+            "properties": {
+                "domain": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "valid": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "net.MX": {
+            "type": "object",
+            "properties": {
+                "host": {
+                    "type": "string"
+                },
+                "pref": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
