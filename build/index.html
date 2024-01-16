@@ -1,0 +1,890 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Mailcheck.ing API Documentation - Email Verification and Breach Check Services</title>
+  <meta name="description"
+    content="Explore the comprehensive Mailcheck.ing API documentation. Learn about email verification, SMTP status, breach checks, and more for effective email validation services.">
+  <meta name="keywords"
+    content="Mailcheck.ing API, email verification, email validation, SMTP server, data breaches, API documentation, data breaches api,email verification, email validation, email verification api, email validation api, email verification service, email validation service, email verification tool, email validation tool, email verification software, email validation software, email verification system, email validation system, email verification online, email validation online, email verification service, email validation service, email verification tool, email validation tool, email verification software, email validation software, email verification system, email validation system, email verification online, email validation online, email verification service, email validation service, email verification tool, email validation tool, email verification software, email validation software, email verification system, email validation system, email verification online, email validation online, ">
+  <meta name="author" content="Mailcheck.ing">
+  <meta property="og:title" content="Mailcheck.ing API Documentation - Email Verification and Breach Check Services" />
+  <meta property="og:description"
+    content="Learn about email verification, SMTP status, breach checks, and more with Mailcheck.ing API." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://api.mailcheck.ing/documentation" />
+  <meta property="og:image" content="https://api.mailcheck.ing/images/logo-2906d432.png" />
+
+  <style media="screen">
+    .highlight table td {
+      padding: 5px;
+    }
+
+    .highlight table pre {
+      margin: 0;
+    }
+
+    .highlight .gh {
+      color: #999999;
+    }
+
+    .highlight .sr {
+      color: #f6aa11;
+    }
+
+    .highlight .go {
+      color: #888888;
+    }
+
+    .highlight .gp {
+      color: #555555;
+    }
+
+    .highlight .gs {}
+
+    .highlight .gu {
+      color: #aaaaaa;
+    }
+
+    .highlight .nb {
+      color: #f6aa11;
+    }
+
+    .highlight .cm {
+      color: #75715e;
+    }
+
+    .highlight .cp {
+      color: #75715e;
+    }
+
+    .highlight .c1 {
+      color: #75715e;
+    }
+
+    .highlight .cs {
+      color: #75715e;
+    }
+
+    .highlight .c,
+    .highlight .ch,
+    .highlight .cd,
+    .highlight .cpf {
+      color: #75715e;
+    }
+
+    .highlight .err {
+      color: #960050;
+    }
+
+    .highlight .gr {
+      color: #960050;
+    }
+
+    .highlight .gt {
+      color: #960050;
+    }
+
+    .highlight .gd {
+      color: #49483e;
+    }
+
+    .highlight .gi {
+      color: #49483e;
+    }
+
+    .highlight .ge {
+      color: #49483e;
+    }
+
+    .highlight .kc {
+      color: #66d9ef;
+    }
+
+    .highlight .kd {
+      color: #66d9ef;
+    }
+
+    .highlight .kr {
+      color: #66d9ef;
+    }
+
+    .highlight .no {
+      color: #66d9ef;
+    }
+
+    .highlight .kt {
+      color: #66d9ef;
+    }
+
+    .highlight .mf {
+      color: #ae81ff;
+    }
+
+    .highlight .mh {
+      color: #ae81ff;
+    }
+
+    .highlight .il {
+      color: #ae81ff;
+    }
+
+    .highlight .mi {
+      color: #ae81ff;
+    }
+
+    .highlight .mo {
+      color: #ae81ff;
+    }
+
+    .highlight .m,
+    .highlight .mb,
+    .highlight .mx {
+      color: #ae81ff;
+    }
+
+    .highlight .sc {
+      color: #ae81ff;
+    }
+
+    .highlight .se {
+      color: #ae81ff;
+    }
+
+    .highlight .ss {
+      color: #ae81ff;
+    }
+
+    .highlight .sd {
+      color: #e6db74;
+    }
+
+    .highlight .s2 {
+      color: #e6db74;
+    }
+
+    .highlight .sb {
+      color: #e6db74;
+    }
+
+    .highlight .sh {
+      color: #e6db74;
+    }
+
+    .highlight .si {
+      color: #e6db74;
+    }
+
+    .highlight .sx {
+      color: #e6db74;
+    }
+
+    .highlight .s1 {
+      color: #e6db74;
+    }
+
+    .highlight .s,
+    .highlight .sa,
+    .highlight .dl {
+      color: #e6db74;
+    }
+
+    .highlight .na {
+      color: #a6e22e;
+    }
+
+    .highlight .nc {
+      color: #a6e22e;
+    }
+
+    .highlight .nd {
+      color: #a6e22e;
+    }
+
+    .highlight .ne {
+      color: #a6e22e;
+    }
+
+    .highlight .nf,
+    .highlight .fm {
+      color: #a6e22e;
+    }
+
+    .highlight .vc {
+      color: #ffffff;
+    }
+
+    .highlight .nn {
+      color: #ffffff;
+    }
+
+    .highlight .ni {
+      color: #ffffff;
+    }
+
+    .highlight .bp {
+      color: #ffffff;
+    }
+
+    .highlight .vg {
+      color: #ffffff;
+    }
+
+    .highlight .vi {
+      color: #ffffff;
+    }
+
+    .highlight .nv,
+    .highlight .vm {
+      color: #ffffff;
+    }
+
+    .highlight .w {
+      color: #ffffff;
+    }
+
+    .highlight {
+      color: #ffffff;
+    }
+
+    .highlight .n,
+    .highlight .py,
+    .highlight .nx {
+      color: #ffffff;
+    }
+
+    .highlight .nl {
+      color: #f92672;
+    }
+
+    .highlight .ow {
+      color: #f92672;
+    }
+
+    .highlight .nt {
+      color: #f92672;
+    }
+
+    .highlight .k,
+    .highlight .kv {
+      color: #f92672;
+    }
+
+    .highlight .kn {
+      color: #f92672;
+    }
+
+    .highlight .kp {
+      color: #f92672;
+    }
+
+    .highlight .o {
+      color: #f92672;
+    }
+  </style>
+  <style media="print">
+    * {
+      -webkit-transition: none !important;
+      transition: none !important;
+    }
+
+    .highlight table td {
+      padding: 5px;
+    }
+
+    .highlight table pre {
+      margin: 0;
+    }
+
+    .highlight,
+    .highlight .w {
+      color: #586e75;
+    }
+
+    .highlight .err {
+      color: #002b36;
+      background-color: #dc322f;
+    }
+
+    .highlight .c,
+    .highlight .ch,
+    .highlight .cd,
+    .highlight .cm,
+    .highlight .cpf,
+    .highlight .c1,
+    .highlight .cs {
+      color: #657b83;
+    }
+
+    .highlight .cp {
+      color: #b58900;
+    }
+
+    .highlight .nt {
+      color: #b58900;
+    }
+
+    .highlight .o,
+    .highlight .ow {
+      color: #93a1a1;
+    }
+
+    .highlight .p,
+    .highlight .pi {
+      color: #93a1a1;
+    }
+
+    .highlight .gi {
+      color: #859900;
+    }
+
+    .highlight .gd {
+      color: #dc322f;
+    }
+
+    .highlight .gh {
+      color: #268bd2;
+      background-color: #002b36;
+      font-weight: bold;
+    }
+
+    .highlight .k,
+    .highlight .kn,
+    .highlight .kp,
+    .highlight .kr,
+    .highlight .kv {
+      color: #6c71c4;
+    }
+
+    .highlight .kc {
+      color: #cb4b16;
+    }
+
+    .highlight .kt {
+      color: #cb4b16;
+    }
+
+    .highlight .kd {
+      color: #cb4b16;
+    }
+
+    .highlight .s,
+    .highlight .sb,
+    .highlight .sc,
+    .highlight .dl,
+    .highlight .sd,
+    .highlight .s2,
+    .highlight .sh,
+    .highlight .sx,
+    .highlight .s1 {
+      color: #859900;
+    }
+
+    .highlight .sa {
+      color: #6c71c4;
+    }
+
+    .highlight .sr {
+      color: #2aa198;
+    }
+
+    .highlight .si {
+      color: #d33682;
+    }
+
+    .highlight .se {
+      color: #d33682;
+    }
+
+    .highlight .nn {
+      color: #b58900;
+    }
+
+    .highlight .nc {
+      color: #b58900;
+    }
+
+    .highlight .no {
+      color: #b58900;
+    }
+
+    .highlight .na {
+      color: #268bd2;
+    }
+
+    .highlight .m,
+    .highlight .mb,
+    .highlight .mf,
+    .highlight .mh,
+    .highlight .mi,
+    .highlight .il,
+    .highlight .mo,
+    .highlight .mx {
+      color: #859900;
+    }
+
+    .highlight .ss {
+      color: #859900;
+    }
+  </style>
+  <link href="stylesheets/screen-9c19b03a.css" rel="stylesheet" media="screen" />
+  <link href="stylesheets/print-966d6edc.css" rel="stylesheet" media="print" />
+  <script src="javascripts/all_nosearch-18c3ed8e.js"></script>
+
+</head>
+
+<body class="index" data-languages="[]">
+  <a href="#" id="nav-button">
+    <span>
+      NAV
+      <img src="images/navbar-cad8cdcb.png" alt="" />
+    </span>
+  </a>
+  <div class="toc-wrapper">
+    <img src="images/logo-2906d432.png" class="logo" alt="" />
+    <ul id="toc" class="toc-list-h1">
+      <li>
+        <a href="#mailcheck-ing-api-documentation" class="toc-h1 toc-link"
+          data-title="Mailcheck.ing API Documentation">Mailcheck.ing API Documentation</a>
+        <ul class="toc-list-h2">
+          <li>
+            <a href="#api-information" class="toc-h2 toc-link" data-title="API Information">API Information</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h2 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#endpoints" class="toc-h2 toc-link" data-title="Endpoints">Endpoints</a>
+          </li>
+          <li>
+            <a href="#definitions" class="toc-h2 toc-link" data-title="Definitions">Definitions</a>
+          </li>
+          <li>
+            <a href="#contact" class="toc-h2 toc-link" data-title="Contact">Contact</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="page-wrapper">
+    <div class="dark-box"></div>
+    <div class="content">
+      <h1 id='mailcheck-ing-api-documentation'>Mailcheck.ing API Documentation</h1>
+      <p>Welcome to the Mailcheck.ing API. This API allows you to verify email addresses to check their validity, domain
+        details, SMTP server status, check data breaches, and more.</p>
+      <h2 id='api-information'>API Information</h2>
+      <ul>
+        <li><strong>API Version</strong>: 1.0</li>
+        <li><strong>Base URL</strong>: <code>https://api.mailcheck.ing</code></li>
+      </ul>
+      <h2 id='authentication'>Authentication</h2>
+      <blockquote>
+        <p>For Authentication, use Authorization header</p>
+      </blockquote>
+      <div class="highlight">
+        <pre class="highlight shell tab-shell"><code>curl <span class="s2">"URL"</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: &lt;API-KEY&gt;"</span>
+</code></pre>
+      </div>
+      <p>To access the Mailcheck.ing API, you must provide your authentication credentials in the request header.</p>
+
+      <ul>
+        <li><strong>Header Name</strong>: <code>Authorization</code></li>
+        <li><strong>Type</strong>: <code>string</code></li>
+        <li><strong>Required</strong>: Yes</li>
+      </ul>
+      <h2 id='endpoints'>Endpoints</h2>
+      <blockquote>
+        <p>Sample request: POST https://api.mailcheck.ing/v1/verify</p>
+      </blockquote>
+      <div class="highlight">
+        <pre class="highlight shell tab-shell"><code>curl <span class="nt">-X</span> <span class="s1">'POST'</span> <span class="se">\</span>
+  <span class="s1">'https://api.mailcheck.ing/v1/verify'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'accept: application/json'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Authorization: &lt;API_KEY_HERE&gt;'</span> <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+  "check_breach": true,
+  "email": "string",
+  "verify": true
+}'</span>
+</code></pre>
+      </div>
+      <h3 id='verify-email-address'>Verify Email Address</h3>
+      <p>Verifies the provided email address with optional breach and verification checks.</p>
+
+      <ul>
+        <li><strong>URL</strong>: <code>/v1/verify</code></li>
+        <li><strong>Method</strong>: <code>POST</code></li>
+        <li><strong>Content-Type</strong>: <code>application/json</code></li>
+        <li><strong>Authorization</strong>: Required</li>
+      </ul>
+      <h4 id='request-parameters'>Request Parameters</h4>
+      <ul>
+        <li><strong>check_breach</strong>: Flag to enable breach check. If true, then a breach check will be performed.
+        </li>
+        <li><strong>email</strong>: The email address to verify.</li>
+        <li><strong>verify</strong>: Flag to enable verification check. If true, then Syntax, MX, SMTP, CatchAll checks
+          will be performed.</li>
+      </ul>
+      <h4 id='request-example'>Request Example</h4>
+      <p><code>
+{
+&quot;check_breach&quot;: true,
+&quot;email&quot;: &quot;example@example.com&quot;,
+&quot;verify&quot;: true
+}
+</code>
+      <aside class="notice">
+        API usage will be calculated based on if the verify and check_breach parameters are set to true. If both are set
+        to true, then 2 API calls will be consumed. check_breach is under active development and will be available soon.
+      </aside>
+      </p>
+      <h4 id='responses'>Responses</h4>
+      <blockquote>
+        <p>Sample 200 Response</p>
+      </blockquote>
+      <div class="highlight">
+        <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test@gmail.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"reachable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"no"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"syntax"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gmail.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"valid"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"smtp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"host_exists"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"full_inbox"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"catch_all"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"deliverable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"disabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"gravatar"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"gravatarUrl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://gravatar.com/example"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"hasGravatar"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"suggestion"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"disposable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"role_account"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"free"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"mx"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"HasMXRecord"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"Records"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"Host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gmail-smtp-in.l.google.com."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Pref"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"Host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt1.gmail-smtp-in.l.google.com."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Pref"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"Host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt2.gmail-smtp-in.l.google.com."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Pref"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"Host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt3.gmail-smtp-in.l.google.com."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Pref"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"Host"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alt4.gmail-smtp-in.l.google.com."</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"Pref"</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"breach"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"found"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"details"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+      </div>
+      <h5 id='200-ok'>200 OK</h5>
+      <p>Successful response with details about the email verification.</p>
+      <h6 id='response-attributes'>Response Attributes</h6>
+      <ul>
+        <li><strong>breach</strong>: Details about the breach, if any.</li>
+        <li><strong>disposable</strong>: Indicates if the email is from a disposable email provider.</li>
+        <li><strong>email</strong>: The email address that was verified.</li>
+        <li><strong>free</strong>: Indicates if the domain is a free email domain.</li>
+        <li><strong>gravatar</strong>: Details about the Gravatar associated with the email.</li>
+        <li><strong>mx</strong>: Details about the MX records of the domain.</li>
+        <li><strong>reachable</strong>: Describes whether the recipient address is real.</li>
+        <li><strong>role_account</strong>: Indicates if the account is role-based.</li>
+        <li><strong>smtp</strong>: Details about the SMTP response of the email.</li>
+        <li><strong>suggestion</strong>: Suggested domain if the original domain is misspelled.</li>
+        <li><strong>syntax</strong>: Details about the email address syntax.</li>
+      </ul>
+
+      <aside class="notice">
+        reachable parameter can have following values:
+        <ul>
+          <li>"yes" - The recipient address is real and deliverable.</li>
+          <li>"no" - The recipient address is not deliverable.</li>
+          <li>"unknown" - The SMTP server does not allow verification(There could be several reasons and accept all is
+            one of them).</li>
+        </ul>
+      </aside>
+      <h5 id='400-bad-request'>400 Bad Request</h5>
+      <p>The request was invalid or cannot be served.</p>
+      <h5 id='401-unauthorized'>401 Unauthorized</h5>
+      <p>Authentication credentials were missing or incorrect.</p>
+      <h5 id='500-internal-server-error'>500 Internal Server Error</h5>
+      <p>Something went wrong on the server.</p>
+
+      <aside class="notice">
+        "Accept all" in the context of SMTP (Simple Mail Transfer Protocol) refers to a configuration or behavior of a
+        mail server where the server accepts all incoming email messages regardless of whether the recipient address is
+        valid or exists on the server. This behavior can be seen in certain types of mail servers, especially in
+        corporate environments or specialized SMTP services.
+      </aside>
+      <h3 id='result'>Result</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>breach</td>
+            <td>object</td>
+            <td>Details about the breach.</td>
+          </tr>
+          <tr>
+            <td>disposable</td>
+            <td>boolean</td>
+            <td>Whether it is a disposable email address.</td>
+          </tr>
+          <tr>
+            <td>email</td>
+            <td>string</td>
+            <td>Passed email address.</td>
+          </tr>
+          <tr>
+            <td>free</td>
+            <td>boolean</td>
+            <td>Whether the domain is a free email domain.</td>
+          </tr>
+          <tr>
+            <td>gravatar</td>
+            <td>object</td>
+            <td>Gravatar details.</td>
+          </tr>
+          <tr>
+            <td>mx</td>
+            <td>object</td>
+            <td>Details about the MX records of the domain.</td>
+          </tr>
+          <tr>
+            <td>reachable</td>
+            <td>string</td>
+            <td>Describes whether the recipient address is real.</td>
+          </tr>
+          <tr>
+            <td>role_account</td>
+            <td>boolean</td>
+            <td>Whether the account is role-based.</td>
+          </tr>
+          <tr>
+            <td>smtp</td>
+            <td>object</td>
+            <td>SMTP response details of the email.</td>
+          </tr>
+          <tr>
+            <td>suggestion</td>
+            <td>string</td>
+            <td>Domain suggestion for misspelled domains.</td>
+          </tr>
+          <tr>
+            <td>syntax</td>
+            <td>object</td>
+            <td>Details about the email address syntax.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 id='definitions'>Definitions</h2>
+      <h3 id='breach'>Breach</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>details</td>
+            <td>array</td>
+            <td>Array of <code>Breach.Details</code>.</td>
+          </tr>
+          <tr>
+            <td>found</td>
+            <td>boolean</td>
+            <td>Indicates if a breach was found.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id='breach-details'>Breach.Details</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>date</td>
+            <td>string</td>
+            <td>Date of the breach.</td>
+          </tr>
+          <tr>
+            <td>description</td>
+            <td>string</td>
+            <td>Description of the breach.</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>string</td>
+            <td>Name of the breach.</td>
+          </tr>
+          <tr>
+            <td>title</td>
+            <td>string</td>
+            <td>Title of the breach.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id='gravatar'>Gravatar</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>gravatarUrl</td>
+            <td>string</td>
+            <td>Gravatar URL.</td>
+          </tr>
+          <tr>
+            <td>hasGravatar</td>
+            <td>boolean</td>
+            <td>Whether has gravatar.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id='mx'>Mx</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>hasMXRecord</td>
+            <td>Indicates if there is one or more MX records.</td>
+          </tr>
+          <tr>
+            <td>records</td>
+            <td>Represents DNS MX records. <code>Mx.Records</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id='mx-records'>Mx.Records</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>host</td>
+            <td>The host of the MX record.</td>
+          </tr>
+          <tr>
+            <td>pref</td>
+            <td>The preference number of the MX record.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id='smtp'>SMTP</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>catch_all</td>
+            <td>Indicates if the domain has a catch-all email address.</td>
+          </tr>
+          <tr>
+            <td>deliverable</td>
+            <td>Indicates if an email can be sent to the email server.</td>
+          </tr>
+          <tr>
+            <td>disabled</td>
+            <td>Indicates if the email is blocked or disabled by the provider.</td>
+          </tr>
+          <tr>
+            <td>full_inbox</td>
+            <td>Indicates if the email account&#39;s inbox is full.</td>
+          </tr>
+          <tr>
+            <td>host_exists</td>
+            <td>Indicates if the host exists.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3 id='syntax'>Syntax</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>domain</td>
+            <td>The domain part of the email address.</td>
+          </tr>
+          <tr>
+            <td>username</td>
+            <td>The username part of the email address.</td>
+          </tr>
+          <tr>
+            <td>valid</td>
+            <td>Indicates if the email address is in a valid format.</td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 id='contact'>Contact</h2>
+      <p>For any additional information or support, please contact the contact@mailcheck.ing</p>
+
+    </div>
+    <div class="dark-box">
+    </div>
+  </div>
+</body>
+
+</html>
