@@ -5,7 +5,7 @@ Welcome to the Mailcheck.ing API. This API allows you to verify email addresses 
 ## API Information
 
 - **API Version**: 1.0
-- **Base URL**: `http://api.mailcheck.ing`
+- **Base URL**: `https://api.mailcheck.ing`
 
 ## Authentication
 
